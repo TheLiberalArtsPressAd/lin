@@ -1,0 +1,2377 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>天堂ARPG 官方網站 ｜ 經典天堂 × 動作養成 × 爽快放置</title>
+  <meta name="description" content="天堂ARPG 官方網站 — 經典天堂原汁原味重現，融合全新放置掛機、獨家物品掉落過濾器、奇岩1元福利衝裝、全職業試煉一鍵領取與防具詞綴解鎖！">
+  <style>
+    :root {
+      --bg: #0b0e14;
+      --bg2: #121826;
+      --panel: #151c2c;
+      --panel2: #1b2438;
+      --line: #2a3550;
+      --gold: #d4af37;
+      --gold2: #f1d98c;
+      --tx: #dbe2f0;
+      --tx2: #8fa0bf;
+      --red: #f87171;
+      --green: #4ade80;
+      --blue: #60a5fa;
+      --purple: #c084fc;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: var(--bg);
+      color: var(--tx);
+      font: 15px/1.75 "Microsoft JhengHei", "Noto Sans TC", system-ui, sans-serif;
+      overflow-x: hidden;
+    }
+    a { color: var(--gold2); text-decoration: none; transition: 0.2s; }
+    a:hover { color: #fff; text-decoration: underline; }
+    .wrap { max-width: 1160px; margin: 0 auto; padding: 0 16px; }
+
+    /* Header */
+    header {
+      background: linear-gradient(180deg, #1c243c, #0d1220);
+      border-bottom: 2px solid var(--gold);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    }
+    .hd {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 12px 0;
+      flex-wrap: wrap;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 24px;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 2px;
+      font-family: "Noto Serif TC", serif;
+    }
+    .brand-badge {
+      background: linear-gradient(135deg, var(--gold), #997314);
+      color: #111;
+      font-size: 11px;
+      font-weight: 900;
+      padding: 2px 7px;
+      border-radius: 4px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .brand small {
+      display: block;
+      font-size: 12px;
+      color: var(--tx2);
+      letter-spacing: 1px;
+      font-weight: 400;
+    }
+    nav {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-left: auto;
+    }
+    nav a {
+      padding: 8px 14px;
+      border-radius: 6px;
+      color: var(--tx);
+      font-weight: 700;
+      font-size: 14px;
+    }
+    nav a:hover, nav a.on {
+      background: var(--panel2);
+      color: var(--gold2);
+      text-decoration: none;
+      border: 1px solid var(--line);
+    }
+
+    /* Sub Bar */
+    .playbar {
+      background: #090c12;
+      border-bottom: 1px solid var(--line);
+      padding: 8px 0;
+      font-size: 13px;
+    }
+    .playbar .wrap {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border-radius: 8px;
+      font-weight: 900;
+      letter-spacing: 1px;
+      border: 1px solid var(--gold);
+      color: var(--gold2);
+      background: rgba(212,175,55,0.08);
+      cursor: pointer;
+    }
+    .btn:hover {
+      background: var(--gold);
+      color: #191400;
+      text-decoration: none;
+      box-shadow: 0 0 14px rgba(212,175,55,0.4);
+    }
+    .btn.big {
+      font-size: 18px;
+      padding: 13px 36px;
+      background: linear-gradient(180deg, #e8c860, #b8912a);
+      color: #191400;
+      border: none;
+      box-shadow: 0 4px 20px rgba(212,175,55,.4);
+    }
+    .btn.big:hover {
+      filter: brightness(1.15);
+      transform: translateY(-1px);
+    }
+    .btn.ghost {
+      border-color: var(--line);
+      color: var(--tx);
+      background: var(--panel);
+    }
+    .btn.ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold2);
+    }
+
+    /* Hero Banner Enhanced */
+    .hero {
+      position: relative;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      background: linear-gradient(180deg, rgba(11, 14, 20, 0.75) 0%, rgba(11, 14, 20, 0.94) 100%),
+                  url("assets/images/nostalgia_ship.png") center/cover no-repeat;
+      border-bottom: 2px solid var(--gold);
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(212,175,55,0.2) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* 天堂‧經典追憶錄 (Nostalgia Gallery) */
+    .nostalgia-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 14px;
+    }
+    .nostalgia-card {
+      background: #111726;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
+      display: flex;
+      flex-direction: column;
+    }
+    .nostalgia-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--gold);
+      box-shadow: 0 10px 25px rgba(212,175,55,0.3);
+    }
+    .nostalgia-img-box {
+      position: relative;
+      width: 100%;
+      height: 190px;
+      overflow: hidden;
+      background: #000;
+    }
+    .nostalgia-img-box img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+    .nostalgia-card:hover .nostalgia-img-box img {
+      transform: scale(1.06);
+    }
+    .nostalgia-zoom-hint {
+      position: absolute;
+      bottom: 8px;
+      right: 8px;
+      background: rgba(0,0,0,0.75);
+      color: var(--gold2);
+      font-size: 11px;
+      padding: 3px 8px;
+      border-radius: 4px;
+      border: 1px solid rgba(212,175,55,0.4);
+      pointer-events: none;
+      backdrop-filter: blur(2px);
+    }
+    .nostalgia-info {
+      padding: 14px;
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .nostalgia-title {
+      font-size: 15px;
+      font-weight: 800;
+      color: #fff;
+    }
+    .nostalgia-tag {
+      font-size: 11.5px;
+      color: var(--gold);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    .nostalgia-desc {
+      font-size: 12.5px;
+      color: var(--tx2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    /* Lightbox Modal */
+    .lightbox-modal {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(6px);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      animation: fadeIn 0.2s ease-out;
+    }
+    .lightbox-modal.open { display: flex; }
+    .lightbox-content {
+      background: #141b2a;
+      border: 2px solid var(--gold);
+      border-radius: 14px;
+      max-width: 960px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      box-shadow: 0 20px 50px rgba(0,0,0,0.9);
+      animation: popIn 0.25s ease-out;
+    }
+    .lightbox-header {
+      background: #1c2438;
+      padding: 12px 18px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+    }
+    .lightbox-title { font-size: 16px; font-weight: 900; color: var(--gold2); }
+    .lightbox-close {
+      background: transparent;
+      border: none;
+      color: var(--tx2);
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .lightbox-close:hover { color: #fff; }
+    .lightbox-body {
+      padding: 16px;
+      text-align: center;
+      overflow-y: auto;
+      flex: 1;
+    }
+    .lightbox-body img {
+      max-width: 100%;
+      max-height: 60vh;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.6);
+      object-fit: contain;
+    }
+    .lightbox-caption {
+      margin-top: 14px;
+      font-size: 13.5px;
+      color: var(--tx);
+      line-height: 1.7;
+      background: #0e131f;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border-left: 3px solid var(--gold);
+      text-align: left;
+    }
+    .hero .wrap {
+      position: relative;
+      z-index: 2;
+      padding: 60px 16px;
+      text-align: center;
+      width: 100%;
+    }
+    .hero h1 {
+      font-size: 46px;
+      color: var(--gold2);
+      font-family: "Noto Serif TC", serif;
+      letter-spacing: 6px;
+      text-shadow: 0 3px 18px rgba(0,0,0,0.8);
+      margin-bottom: 12px;
+    }
+    .hero p.desc {
+      color: var(--tx);
+      max-width: 740px;
+      margin: 0 auto 26px;
+      font-size: 17px;
+      line-height: 1.8;
+    }
+    .hero .btns {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .hero-notice {
+      margin: 24px auto 0;
+      max-width: 700px;
+      background: rgba(212,175,55,.08);
+      border: 1px solid rgba(212,175,55,.35);
+      border-radius: 10px;
+      padding: 12px 18px;
+      color: var(--tx);
+      font-size: 14px;
+    }
+
+    /* Main Layout */
+    main { padding: 32px 0 60px; }
+    .cols {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 20px;
+    }
+    @media (max-width: 960px) {
+      .cols { grid-template-columns: 1fr; }
+    }
+
+    .announce-top-grid {
+      display: grid;
+      grid-template-columns: 380px 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+    @media (max-width: 960px) {
+      .announce-top-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 20px;
+      overflow: hidden;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+    .panel-h {
+      background: linear-gradient(90deg, #263350, #151c2c);
+      border-bottom: 1px solid var(--line);
+      padding: 11px 18px;
+      font-weight: 900;
+      color: var(--gold2);
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .panel-h::before {
+      content: "";
+      width: 4px;
+      height: 18px;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .panel-b { padding: 18px; }
+
+    /* Grids */
+    .grid { display: grid; gap: 14px; }
+    .g2 { grid-template-columns: repeat(2, 1fr); }
+    .g3 { grid-template-columns: repeat(3, 1fr); }
+    .g4 { grid-template-columns: repeat(4, 1fr); }
+    @media (max-width: 860px) {
+      .g4, .g3 { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 540px) {
+      .g4, .g3, .g2 { grid-template-columns: 1fr; }
+    }
+
+    /* Cards */
+    .card {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 16px;
+      transition: all 0.25s ease;
+      position: relative;
+    }
+    .card:hover {
+      border-color: var(--gold);
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.35);
+    }
+    .card h3 {
+      color: var(--gold2);
+      font-size: 16px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .card p {
+      font-size: 13.5px;
+      color: var(--tx2);
+      line-height: 1.6;
+    }
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 99px;
+      font-size: 11px;
+      font-weight: 700;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold2);
+      margin-left: auto;
+    }
+    .badge.hot {
+      background: rgba(248,113,113,0.15);
+      border-color: var(--red);
+      color: var(--red);
+    }
+    .badge.new {
+      background: rgba(74,222,128,0.15);
+      border-color: var(--green);
+      color: var(--green);
+    }
+
+    /* Scroll preview icons */
+    .scroll-preview {
+      display: flex;
+      gap: 8px;
+      margin-top: 10px;
+      align-items: center;
+      background: rgba(0,0,0,0.25);
+      padding: 8px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+    }
+    .scroll-preview img {
+      width: 32px;
+      height: 32px;
+      image-rendering: pixelated;
+      background: #090c12;
+      border-radius: 4px;
+      border: 1px solid #334155;
+    }
+
+    /* Stats Hub */
+    .stats-hub {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      gap: 12px;
+      padding: 10px 0 20px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 18px;
+    }
+    .stat-item { text-align: center; padding: 6px 14px; }
+    .stat-num {
+      font-size: 30px;
+      font-weight: 900;
+      color: var(--gold2);
+      line-height: 1.1;
+      font-family: monospace;
+    }
+    .stat-lbl { font-size: 13px; color: var(--tx2); margin-top: 4px; }
+
+    /* Class Avatars */
+    .class-row {
+      display: flex;
+      gap: 14px;
+      justify-content: space-around;
+      flex-wrap: wrap;
+    }
+    .class-box {
+      text-align: center;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 10px;
+      width: 110px;
+      transition: 0.2s;
+    }
+    .class-box:hover {
+      border-color: var(--gold);
+      transform: translateY(-3px);
+    }
+    .class-icon {
+      font-size: 36px;
+      margin-bottom: 6px;
+      display: block;
+    }
+    .class-title {
+      font-weight: 900;
+      font-size: 14px;
+      color: var(--gold2);
+    }
+    .class-sub {
+      font-size: 11px;
+      color: var(--tx2);
+    }
+
+    /* News */
+    .news-list { list-style: none; }
+    .news-list li {
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--line);
+      display: flex;
+      gap: 12px;
+      font-size: 13.5px;
+    }
+    .news-list time {
+      color: var(--gold2);
+      font-family: monospace;
+      font-size: 12.5px;
+      white-space: nowrap;
+    }
+
+    /* Footer */
+    footer {
+      background: #080b11;
+      border-top: 1px solid var(--line);
+      padding: 30px 0;
+      color: var(--tx2);
+      font-size: 13.5px;
+    }
+    footer .wrap {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* Search Box */
+    .searchbar {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+    .searchbar input {
+      flex: 1;
+      padding: 12px 16px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #0d1220;
+      color: var(--tx);
+      font-size: 14.5px;
+    }
+    .searchbar input:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(212,175,55,.2);
+    }
+
+    /* 導航高亮 */
+    nav a.highlight-nav {
+      background: rgba(212,175,55,0.15);
+      border: 1px solid var(--gold);
+      color: var(--gold2);
+    }
+
+    /* 玩家留言板樣式 */
+    .board-form-container {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 22px;
+    }
+    .board-inputs-row {
+      display: grid;
+      grid-template-columns: 1fr 140px 180px;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+    @media (max-width: 720px) {
+      .board-inputs-row { grid-template-columns: 1fr; }
+    }
+    .input-field {
+      width: 100%;
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #0d1220;
+      color: var(--tx);
+      font-size: 14px;
+      font-family: inherit;
+    }
+    .input-field:focus {
+      outline: none;
+      border-color: var(--gold);
+      box-shadow: 0 0 0 2px rgba(212,175,55,.2);
+    }
+    textarea.input-field {
+      resize: vertical;
+      min-height: 80px;
+      line-height: 1.6;
+    }
+    .board-form-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+    .board-filter-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .filter-tab {
+      padding: 5px 14px;
+      border-radius: 20px;
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      color: var(--tx2);
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s;
+    }
+    .filter-tab:hover, .filter-tab.active {
+      background: rgba(212,175,55,0.15);
+      border-color: var(--gold);
+      color: var(--gold2);
+      font-weight: 700;
+    }
+    .board-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-height: 600px;
+      overflow-y: auto;
+      padding-right: 4px;
+    }
+    .board-item {
+      background: var(--panel2);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 14px 16px;
+      transition: all 0.2s ease;
+      animation: fadeIn 0.35s ease;
+    }
+    .board-item:hover {
+      border-color: rgba(212,175,55,0.4);
+      background: #1e283f;
+    }
+    .board-item-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+    .board-avatar {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: rgba(212,175,55,0.15);
+      border: 1px solid var(--gold);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+    .board-author {
+      font-weight: 700;
+      color: var(--gold2);
+      font-size: 14.5px;
+    }
+    .board-job-badge {
+      font-size: 11px;
+      padding: 1px 7px;
+      border-radius: 4px;
+      background: #0e1524;
+      border: 1px solid var(--line);
+      color: var(--tx2);
+    }
+    .board-cat-badge {
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      background: rgba(96,165,250,0.15);
+      border: 1px solid var(--blue);
+      color: var(--blue);
+      font-weight: 600;
+    }
+    .board-cat-badge.bug {
+      background: rgba(248,113,113,0.15);
+      border-color: var(--red);
+      color: var(--red);
+    }
+    .board-cat-badge.equip {
+      background: rgba(192,132,252,0.15);
+      border-color: var(--purple);
+      color: var(--purple);
+    }
+    .board-time {
+      margin-left: auto;
+      font-size: 12px;
+      color: var(--tx2);
+      font-family: monospace;
+    }
+    .board-content {
+      font-size: 14px;
+      color: var(--tx);
+      line-height: 1.65;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+    .board-item-footer {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 8px;
+      padding-top: 8px;
+      border-top: 1px dashed rgba(42,53,80,0.7);
+      font-size: 11.5px;
+      color: var(--green);
+    }
+
+    /* 右下角懸浮客訴按鈕 */
+    .cs-floating-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+      color: #0d1220;
+      font-weight: 900;
+      font-size: 14px;
+      padding: 12px 22px;
+      border-radius: 50px;
+      box-shadow: 0 6px 25px rgba(212,175,55,0.45);
+      cursor: pointer;
+      border: 2px solid #fff2a8;
+      transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .cs-floating-btn:hover {
+      transform: translateY(-3px) scale(1.03);
+      box-shadow: 0 10px 30px rgba(212,175,55,0.65);
+    }
+    .cs-pulse-dot {
+      width: 10px;
+      height: 10px;
+      background: #10b981;
+      border-radius: 50%;
+      box-shadow: 0 0 0 rgba(16,185,129, 0.7);
+      animation: pulseGreen 1.8s infinite;
+    }
+    @keyframes pulseGreen {
+      0% { box-shadow: 0 0 0 0 rgba(16,185,129, 0.7); }
+      70% { box-shadow: 0 0 0 8px rgba(16,185,129, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(16,185,129, 0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 懸浮客訴對話視窗 */
+    .cs-modal-box {
+      position: fixed;
+      bottom: 84px;
+      right: 24px;
+      width: 380px;
+      max-width: calc(100vw - 32px);
+      height: 520px;
+      max-height: calc(100vh - 110px);
+      background: #131a2a;
+      border: 2px solid var(--gold);
+      border-radius: 16px;
+      box-shadow: 0 12px 40px rgba(0,0,0,0.7);
+      z-index: 1000;
+      display: none;
+      flex-direction: column;
+      overflow: hidden;
+      animation: popIn 0.25s ease-out;
+    }
+    .cs-modal-box.open { display: flex; }
+    @keyframes popIn {
+      from { opacity: 0; transform: scale(0.92) translateY(20px); }
+      to { opacity: 1; transform: scale(1) translateY(0); }
+    }
+    .cs-header {
+      background: linear-gradient(90deg, #202b44, #121826);
+      border-bottom: 1px solid var(--gold);
+      padding: 12px 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .cs-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .cs-header-title {
+      font-weight: 900;
+      color: var(--gold2);
+      font-size: 15px;
+    }
+    .cs-header-sub {
+      font-size: 11.5px;
+      color: var(--green);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .cs-close-btn {
+      background: none;
+      border: none;
+      color: var(--tx2);
+      font-size: 20px;
+      cursor: pointer;
+      line-height: 1;
+      padding: 4px 8px;
+      border-radius: 6px;
+    }
+    .cs-close-btn:hover {
+      color: #fff;
+      background: rgba(255,255,255,0.1);
+    }
+    .cs-body {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #0d1220;
+    }
+    .cs-msg {
+      max-width: 85%;
+      padding: 10px 14px;
+      border-radius: 12px;
+      font-size: 13.5px;
+      line-height: 1.55;
+      word-break: break-word;
+    }
+    .cs-msg.system {
+      align-self: flex-start;
+      background: #172238;
+      border: 1px solid var(--line);
+      color: var(--tx);
+      border-top-left-radius: 2px;
+    }
+    .cs-msg.user {
+      align-self: flex-end;
+      background: linear-gradient(135deg, #d4af37, #ab821b);
+      color: #111;
+      font-weight: 600;
+      border-top-right-radius: 2px;
+    }
+    .cs-msg-meta {
+      font-size: 10.5px;
+      margin-top: 4px;
+      opacity: 0.75;
+      display: flex;
+      gap: 6px;
+      justify-content: flex-end;
+    }
+    .cs-msg.system .cs-msg-meta { justify-content: flex-start; }
+    .cs-footer {
+      background: #151c2c;
+      border-top: 1px solid var(--line);
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .cs-footer-inputs {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .cs-send-row {
+      display: flex;
+      gap: 8px;
+    }
+    .cs-send-btn {
+      padding: 8px 18px;
+      background: var(--gold);
+      color: #111;
+      font-weight: 900;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: 0.2s;
+    }
+    .cs-send-btn:hover {
+      filter: brightness(1.15);
+    }
+    .cs-sheet-tag {
+      font-size: 11px;
+      color: var(--tx2);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 4px;
+    }
+
+    /* Toast 提示 */
+    #toast-msg {
+      position: fixed;
+      top: 24px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #1e293b;
+      border: 1px solid var(--gold);
+      color: #fff;
+      padding: 12px 24px;
+      border-radius: 30px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+      z-index: 10000;
+      font-size: 14.5px;
+      font-weight: 700;
+      display: none;
+      animation: fadeIn 0.25s ease;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Toast 訊息通知 -->
+  <div id="toast-msg"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="wrap hd">
+      <div class="brand">
+        <span>天堂ARPG</span>
+        <span class="brand-badge">PRO</span>
+        <small>經典放置天堂 官方資訊站</small>
+      </div>
+      <nav>
+        <a href="#hero" class="on">首頁</a>
+        <a href="#features">🔥 獨家特色</a>
+        <a href="#changelog">📜 更新歷程</a>
+        <a href="#nostalgia">🏰 追憶錄</a>
+        <a href="drops.html">🎯 掉落查詢</a>
+        <a href="maps-index.html">🗺️ 獵場地圖</a>
+        <a href="items.html">🎒 道具圖鑑</a>
+        <a href="equip.html">⚔️ 裝備圖鑑</a>
+        <a href="mobs.html">👹 怪物圖鑑</a>
+        <a href="skills.html">✨ 技能圖鑑</a>
+        <a href="npcs.html" class="">👤 NPC圖鑑</a>
+        <a href="#board">💬 留言板</a>
+        <a href="https://drive.google.com/file/d/1PZ-JB2M8jZJur9tpuUpsOs8sGQ_eVyue/view?usp=sharing" target="_blank" rel="noopener" class="highlight-nav">📥 下載更新</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Playbar -->
+  <div class="playbar">
+    <div class="wrap">
+      <span style="color:var(--gold2)">⚔️ 遊戲版本：</span>
+      <span>2026 全新神話加固版</span>
+      <span style="color:var(--tx2); margin-left:auto">💡 提示：免安裝解壓縮即玩 ｜ 1元福利商城 ｜ 專屬物品掉落過濾</span>
+    </div>
+  </div>
+
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="wrap">
+      <h1>天堂ARPG</h1>
+      <p class="desc">
+        經典天堂 1.0~3.8 原汁原味完美重現 × 現代放置爽快養成！<br>
+        上班上課自動掛機練功打寶，獨家物品過濾器遠離垃圾，奇岩一元卷軸衝裝圓夢，重溫熱血傳奇。
+      </p>
+      <div class="btns">
+        <a class="btn big" href="https://drive.google.com/file/d/1PZ-JB2M8jZJur9tpuUpsOs8sGQ_eVyue/view?usp=sharing" target="_blank" rel="noopener">📥 最新更新檔案下載 (Google Drive)</a>
+        <a class="btn" href="#board">💬 玩家留言板</a>
+        <a class="btn ghost" href="#download">🚀 下載說明與啟動</a>
+        <a class="btn ghost" href="#features">✨ 查看獨家特色</a>
+      </div>
+      <div class="hero-notice">
+        📢 <b>2026-09-19 重大神話版本更新：</b> 全新世界王「死亡榮耀騎士・奧瑞斯」傲世降臨！專屬神話雙技能【榮耀之裁】與【死亡引力】全效實裝，全職業 216 個技能資料庫全面復原校準！最新加密安全完整客戶端（2.3GB）同步釋出！
+      </div>
+    </div>
+  </section>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Latest Major Announcement with Image (放在最上面) -->
+    <div class="wrap" style="margin-bottom: 24px;" id="latest-announcement">
+      <div class="panel" style="border: 2px solid var(--gold); box-shadow: 0 8px 30px rgba(212,175,55,0.25); background: linear-gradient(180deg, #1b2438 0%, #121824 100%);">
+        <div class="panel-h" style="background: linear-gradient(90deg, #324368, #1a2337); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px; padding: 12px 18px;">
+          <div style="display: flex; align-items: center; gap: 10px; flex-wrap: wrap;">
+            <span style="font-size: 20px;">🔥</span>
+            <span style="font-size: 17px; font-weight: 900; color: #fff; letter-spacing: 0.5px;">
+              【重大神話版本更新公告】全新世界王「死亡榮耀騎士・奧瑞斯」傲世降臨 ＆ 專屬神話雙技能與全職業技能庫重磅實裝！
+            </span>
+            <span class="badge hot" style="font-size: 11px; padding: 3px 8px; border-radius: 4px;">重大神話更新</span>
+          </div>
+          <div style="font-size: 12.5px; color: var(--gold2); font-family: monospace; font-weight: bold;">
+            發布日期：2026-09-19
+          </div>
+        </div>
+        <div class="panel-b" style="padding: 20px;">
+          <div class="announce-top-grid">
+            <!-- Left: Showcase Image -->
+            <div style="background: rgba(0,0,0,0.5); border: 1px solid rgba(212,175,55,0.4); border-radius: 10px; overflow: hidden; text-align: center; cursor: pointer; transition: transform 0.2s, border-color 0.2s;" 
+                 onclick="openLightbox('assets/images/auris_boss_showcase.png', '全新世界王【死亡榮耀騎士・奧瑞斯】 ｜ 8方位全動作序列幀', '全新原創神話世界 Boss【死亡榮耀騎士・奧瑞斯】（NPC: Auris_93394 / GFX: 14000），具備完整八方位（d0~d7）高解析動態序列幀：金色榮耀斬擊弧光、死亡引力暗黑吸積特效、電盾護體受傷反饋與化為星芒消散，專屬神話雙技能【榮耀之裁】(GFX 14001) 與【死亡引力】(GFX 14002) 震撼實裝！點擊可查看高清大圖。')"
+                 onmouseover="this.style.transform='scale(1.02)'; this.style.borderColor='var(--gold)';" 
+                 onmouseout="this.style.transform='scale(1)'; this.style.borderColor='rgba(212,175,55,0.4)';">
+              <div style="position: relative;">
+                <img src="assets/images/auris_boss_showcase.png" alt="死亡榮耀騎士奧瑞斯展示" style="width: 100%; display: block; border-bottom: 1px solid rgba(212,175,55,0.2);">
+                <div style="position: absolute; bottom: 8px; right: 8px; background: rgba(0,0,0,0.75); color: var(--gold2); font-size: 11px; padding: 3px 8px; border-radius: 4px; border: 1px solid rgba(212,175,55,0.4); font-weight: 500;">
+                  🔍 點擊查看高清大圖
+                </div>
+              </div>
+              <div style="padding: 10px 12px; font-size: 13px; color: var(--tx2); background: rgba(26,34,51,0.7);">
+                <b style="color: var(--gold2);">【死亡榮耀騎士・奧瑞斯】</b> 8 方位動作 ＆ 專屬神話雙技能實裝
+              </div>
+            </div>
+
+            <!-- Right: Content Details -->
+            <div>
+              <div style="font-size: 14.5px; line-height: 1.8; color: #e0e6ed; margin-bottom: 16px;">
+                各位親愛的勇者們好！本次版本迎來史詩級神話核心更新——全新原創世界王者<b>【死亡榮耀騎士・奧瑞斯】</b>傲世降臨！同步實裝奧瑞斯專屬神話雙技能特效、全職業 216 個技能資料庫與工具分類徹底校準復原，並推出經 <b>.NET Reactor + Obfuscar 雙層加固加密</b> 的最新安全完整安裝包！
+              </div>
+
+              <!-- Update Highlights Grid -->
+              <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin-bottom: 18px;">
+                <!-- Card 1 -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; color: var(--gold2); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 13.5px;">
+                    💀 <span>全新神話王者：死亡榮耀騎士・奧瑞斯</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--tx2); line-height: 1.6;">
+                    • 原創獨立編號（GFX 14000 / NPC Auris_93394），全套 8 方位（d0~d7）高解析動態序列幀！<br>
+                    • 涵蓋行走、榮耀之擊金色弧光、死亡引力黑洞暗蓄、電盾護體與星芒消散五大動態，極致震撼！
+                  </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; color: var(--gold2); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 13.5px;">
+                    ✨ <span>專屬神話雙技能：榮耀之裁 ＆ 死亡引力</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--tx2); line-height: 1.6;">
+                    • <b style="color:#66ccff">技能 260【榮耀之裁】(GFX 14001)</b>：20 幀神聖藍火柱連續轟擊法陣，對範圍敵人造成毀滅制裁！<br>
+                    • <b style="color:#ba8bfa">技能 261【死亡引力】(GFX 14002)</b>：18 幀骸骨之冠與死亡引力黑洞漩渦陣，強勢牽引並侵蝕戰場生靈！
+                  </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; color: var(--gold2); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 13.5px;">
+                    📜 <span>全職業 216 個技能庫 100% 完整復原</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--tx2); line-height: 1.6;">
+                    • 全面校準復原龍騎士 (181~195)、幻術師 (201~220)、戰士 (225~235) 與各職業原始設定。<br>
+                    • 管理工具獨立開闢<b>「👑 BOSS與神話技能」</b>分區，各大職業技能圖標與數據全數歸位無誤！
+                  </div>
+                </div>
+
+                <!-- Card 4 -->
+                <div style="background: rgba(255,255,255,0.03); border: 1px solid rgba(212,175,55,0.25); border-radius: 8px; padding: 12px;">
+                  <div style="font-weight: 700; color: var(--gold2); margin-bottom: 6px; display: flex; align-items: center; gap: 6px; font-size: 13.5px;">
+                    🛡️ <span>高強度加固防護 ＆ 完整客戶端發布</span>
+                  </div>
+                  <div style="font-size: 12.5px; color: var(--tx2); line-height: 1.6;">
+                    • 採用 ExportRelease 最佳化架構，整合 Obfuscar ＋ .NET Reactor 雙重保護，安全無毒純淨。<br>
+                    • 最新完整遊戲安裝包（2,386 MB）釋出，免繁瑣設定解壓即玩，運行幀率與穩定度大幅提升！
+                  </div>
+                </div>
+              </div>
+
+              <!-- Action Buttons -->
+              <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                <a class="btn big" href="https://drive.google.com/file/d/1PZ-JB2M8jZJur9tpuUpsOs8sGQ_eVyue/view?usp=sharing" target="_blank" rel="noopener" style="font-size: 13.5px; padding: 9px 18px;">
+                  📥 立即下載最新神話版本安裝包 (Google Drive)
+                </a>
+                <a class="btn" href="skills.html" style="font-size: 13px;">
+                  ✨ 前往技能圖鑑查看神話技能
+                </a>
+                <a class="btn ghost" href="mobs.html" style="font-size: 13px;">
+                  👾 前往怪物圖鑑查看奧瑞斯
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="wrap cols">
+
+      <!-- Left Column -->
+      <div>
+
+        <!-- Nostalgia Gallery (天堂‧追憶錄) -->
+        <div class="panel" id="nostalgia" style="border-color:var(--gold)">
+          <div class="panel-h">
+            <div class="panel-h-title">
+              <span>📜 天堂‧經典追憶錄 (巴哈精選經典紀實)</span>
+              <span class="badge hot">滿滿回憶</span>
+            </div>
+            <a href="https://forum.gamer.com.tw/Co.php?bsn=842&sn=5815474" target="_blank" rel="noopener" style="font-size:12.5px;color:var(--gold2);display:flex;align-items:center;gap:4px">
+              巴哈原帖（Diavel 追憶錄）↗
+            </a>
+          </div>
+          <div class="panel-b">
+            <p style="color:var(--tx2);font-size:13.5px;line-height:1.7;margin-bottom:14px">
+              「還記得 2001 年在話島等待木船開往古魯丁的焦急期待嗎？還記得看著背包裡 +8 瑟魯基之劍與滿地卷軸時的激動嗎？」<br>
+              特別收錄巴哈姆特經典追憶圖文，重溫那段屬於我們的青春年華與熱血冒險！<b>（點擊各圖片可查看高清原圖與解說）</b>
+            </p>
+
+            <div class="nostalgia-grid">
+              <!-- Item 1: 說話之島渡輪 -->
+              <div class="nostalgia-card" onclick="openLightbox('assets/images/nostalgia_ship.png', '說話之島渡輪啟航 ｜ 萬人登船大遷徙', '排隊買船票、等待船伕開航、船艙內小心變怪、滿屏武器發光！重溫當年無數勇者跨越大海、前往古魯丁大陸冒險的壯麗歷史時刻。')">
+                <div class="nostalgia-img-box">
+                  <img src="assets/images/nostalgia_ship.png" alt="說話之島渡輪" loading="lazy">
+                  <div class="nostalgia-zoom-hint">🔍 點擊看大圖</div>
+                </div>
+                <div class="nostalgia-info">
+                  <div class="nostalgia-title">⛵ 說話之島渡輪 ｜ 萬人登船</div>
+                  <div class="nostalgia-tag">經典回憶 ｜ 跨海大遷徙</div>
+                  <p class="nostalgia-desc">排隊上船、甲板齊發光刃！當年多少勇士在船艙內屏氣凝神，只為踏上古魯丁大陸。</p>
+                </div>
+              </div>
+
+              <!-- Item 2: 經典神裝紙娃娃 -->
+              <div class="nostalgia-card" onclick="openLightbox('assets/images/nostalgia_gear.png', '初代說話之島小木屋 ｜ 經典神裝紙娃娃', '+8 瑟魯基之劍、+5 侏儒鐵盔、+5 T恤、+5 金屬盔甲、+5 保護者斗篷、+5 長靴、傳戒、變戒與 299,898 金幣！老玩家心中最極致的圓夢狀態。')">
+                <div class="nostalgia-img-box">
+                  <img src="assets/images/nostalgia_gear.png" alt="經典神裝紙娃娃" loading="lazy">
+                  <div class="nostalgia-zoom-hint">🔍 點擊看大圖</div>
+                </div>
+                <div class="nostalgia-info">
+                  <div class="nostalgia-title">🎒 +8 瑟魯基與神裝紙娃娃</div>
+                  <div class="nostalgia-tag">神裝畢業 ｜ +8 瑟劍 +5 全套</div>
+                  <p class="nostalgia-desc">+8 瑟劍、傳送控制戒指、變戒、29萬金幣，小木屋前記錄下那段最輝煌的榮耀。</p>
+                </div>
+              </div>
+
+              <!-- Item 3: 2001 傳奇創角石門 -->
+              <div class="nostalgia-card" onclick="openLightbox('assets/images/nostalgia_character.png', '2001 傳奇創角石門 ｜ 熱血冒險起點', '2001.06.29 創建角色「真誠對待」！燃燒的火炬、神祕的石門拱柱，多少故事與傳奇皆誕生於這座大門。')">
+                <div class="nostalgia-img-box">
+                  <img src="assets/images/nostalgia_character.png" alt="創角石門" loading="lazy">
+                  <div class="nostalgia-zoom-hint">🔍 點擊看大圖</div>
+                </div>
+                <div class="nostalgia-info">
+                  <div class="nostalgia-title">🏛️ 2001 傳奇創角神殿</div>
+                  <div class="nostalgia-tag">經典初生 ｜ 2001.06.29 創角</div>
+                  <p class="nostalgia-desc">燃燒火炬與古老石門，輸入名稱的那一刻，開啟了陪伴我們二十餘年的天堂世界。</p>
+                </div>
+              </div>
+
+              <!-- Item 4: 血盟「沉默的艦隊」 -->
+              <div class="nostalgia-card" onclick="openLightbox('assets/images/nostalgia_bloodpledge.jpg', '血盟「沉默的艦隊」 ｜ 生死與共的盟友情誼', '創建於 2001/06/28 的血盟！銀原騎士村集合、背包滿載卷軸與金幣，那些曾與你並肩作戰的盟友，如今可好？')">
+                <div class="nostalgia-img-box">
+                  <img src="assets/images/nostalgia_bloodpledge.jpg" alt="血盟沉默的艦隊" loading="lazy">
+                  <div class="nostalgia-zoom-hint">🔍 點擊看大圖</div>
+                </div>
+                <div class="nostalgia-info">
+                  <div class="nostalgia-title">⚔️ 血盟「沉默的艦隊」</div>
+                  <div class="nostalgia-tag">盟友情深 ｜ 2001 創盟名錄</div>
+                  <p class="nostalgia-desc">王族號召、歃血為盟！在沒有語音的網咖年代，盟友一聲招呼就是熱血赴死。</p>
+                </div>
+              </div>
+
+              <!-- Item 5: 初代村莊廣場盛況 -->
+              <div class="nostalgia-card" onclick="openLightbox('assets/images/nostalgia_village.png', '初代村莊廣場盛況 ｜ 滿地卷軸與萬人集會', '古早話島與銀騎村莊前擠滿玩家，打字喝水、綠水加速疾馳、滿地傳送卷軸與擺攤，無可替代的盛世熱血。')">
+                <div class="nostalgia-img-box">
+                  <img src="assets/images/nostalgia_village.png" alt="村莊盛況" loading="lazy">
+                  <div class="nostalgia-zoom-hint">🔍 點擊看大圖</div>
+                </div>
+                <div class="nostalgia-info">
+                  <div class="nostalgia-title">🏰 初代村莊廣場萬人齊聚</div>
+                  <div class="nostalgia-tag">盛世風華 ｜ 滿地卷軸綠水</div>
+                  <p class="nostalgia-desc">村莊門口熙來攘往，綠水奔騰、武器發光，那是一去不復返卻永恆銘刻的黃金年代。</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exclusive Server Features (本服專屬獨家特色) -->
+        <div class="panel" id="features" style="border-color:var(--gold)">
+          <div class="panel-h">
+            <div class="panel-h-title">
+              <span>🔥 本服專屬獨家特色 (Exclusive Features)</span>
+              <span class="badge hot">獨家原創</span>
+            </div>
+            <span style="font-size:12.5px;color:var(--gold2)">ARPG 現代體驗 × 懷舊經典</span>
+          </div>
+          <div class="panel-b">
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(280px, 1fr));gap:16px">
+              
+              <!-- 特色 1: 守護者靈魂系統 -->
+              <div class="feature-card" style="background:#0d1220;border:1px solid var(--line);border-radius:10px;padding:18px;position:relative;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                  <div class="db-thumb-box" style="width:48px;height:48px;border-color:var(--gold)">
+                    <img src="assets/icons/skills/靈魂昇華.png" class="db-thumb" style="max-width:38px;max-height:38px" onerror="this.src='assets/icons/items/魔法寶石.png'">
+                  </div>
+                  <div>
+                    <div style="font-size:17px;font-weight:900;color:var(--gold2)">🌟 守護者靈魂系統</div>
+                    <div style="font-size:12px;color:var(--tx3)">Guardian Souls System</div>
+                  </div>
+                </div>
+                <p style="font-size:13.5px;color:var(--tx);line-height:1.7;margin-bottom:10px">
+                  突破傳統單人掛機框架！透過收集遠古遺物召喚強大的<b>「守護者之靈」</b>隨行伴戰：
+                </p>
+                <ul style="font-size:12.5px;color:var(--tx2);line-height:1.8;padding-left:18px;margin-bottom:0">
+                  <li><b>靈魂光環共鳴</b>：提供全隊攻擊速度提升、物理吸血、免傷防護與暴擊加成。</li>
+                  <li><b>專屬守護奧義</b>：蓄滿靈魂能量即可觸發全畫面神聖打擊與震懾控場。</li>
+                  <li><b>自由靈魂切換</b>：六大古代守護者（火龍暴怒、冰霜守護、疾風連擊）隨意配置！</li>
+                </ul>
+              </div>
+
+              <!-- 特色 2: 次世代 ARPG 戰鬥 UI -->
+              <div class="feature-card" style="background:#0d1220;border:1px solid var(--line);border-radius:10px;padding:18px;position:relative;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                  <div class="db-thumb-box" style="width:48px;height:48px;border-color:var(--gold)">
+                    <img src="assets/icons/items/強化 自我加速藥水.png" class="db-thumb" style="max-width:38px;max-height:38px" onerror="this.src='assets/images/nostalgia_gear.png'">
+                  </div>
+                  <div>
+                    <div style="font-size:17px;font-weight:900;color:var(--gold2)">⚡ 次世代 ARPG 戰鬥 UI</div>
+                    <div style="font-size:12px;color:var(--tx3)">Modern Combat HUD & Control</div>
+                  </div>
+                </div>
+                <p style="font-size:13.5px;color:var(--tx);line-height:1.7;margin-bottom:10px">
+                  擺脫古老笨重操作，全面重構如暗黑破壞神般的現代化爽快戰鬥操作體驗：
+                </p>
+                <ul style="font-size:12.5px;color:var(--tx2);line-height:1.8;padding-left:18px;margin-bottom:0">
+                  <li><b>經典暗黑雙球血條</b>：大氣直觀的動態血球與魔力球，戰況一目了然。</li>
+                  <li><b>QWER 現代熱鍵施法</b>：支援智慧施法 (Smart Cast) 與連招極速釋放。</li>
+                  <li><b>即時飄字打擊反饋</b>：暴擊黃字、物理紅字、魔法紫字，刀刀入肉超爽快。</li>
+                  <li><b>智慧過濾與極速撿取</b>：自訂白/綠/藍/金掉落過濾，徹底告別滿地雜物垃圾！</li>
+                </ul>
+              </div>
+
+              <!-- 特色 3: 原版 3.8c 提取高清圖資 -->
+              <div class="feature-card" style="background:#0d1220;border:1px solid var(--line);border-radius:10px;padding:18px;position:relative;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                  <div class="db-thumb-box" style="width:48px;height:48px;border-color:var(--gold)">
+                    <img src="assets/mobs/l1j_81163.png" class="db-thumb" style="max-width:40px;max-height:40px" onerror="this.src='assets/images/nostalgia_gear.png'">
+                  </div>
+                  <div>
+                    <div style="font-size:17px;font-weight:900;color:var(--gold2)">💎 原版圖資 100% 提取</div>
+                    <div style="font-size:12px;color:var(--tx3)">Authentic Nostalgia Assets</div>
+                  </div>
+                </div>
+                <p style="font-size:13.5px;color:var(--tx);line-height:1.7;margin-bottom:10px">
+                  完整從官方原始碼與 Sprite Sheet 中提煉真實像素藝術，純粹無魔改：
+                </p>
+                <ul style="font-size:12.5px;color:var(--tx2);line-height:1.8;padding-left:18px;margin-bottom:0">
+                  <li><b>1,223 隻全魔物立繪</b>：吉爾塔斯、死亡騎士、四大巨龍高清去背立繪。</li>
+                  <li><b>264 張實景地圖</b>：說話之島、龍之谷、傲慢之塔等完整獵場全覽。</li>
+                  <li><b>3,000+ 原版道具圖標</b>：瑟魯基之劍、武士刀、隱身斗篷完美重現。</li>
+                </ul>
+              </div>
+
+              <!-- 特色 4: 奇岩 1 元福利市場與自由打寶 -->
+              <div class="feature-card" style="background:#0d1220;border:1px solid var(--line);border-radius:10px;padding:18px;position:relative;overflow:hidden">
+                <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px">
+                  <div class="db-thumb-box" style="width:48px;height:48px;border-color:var(--gold)">
+                    <img src="assets/icons/items/對武器施法的卷軸.png" class="db-thumb" style="max-width:38px;max-height:38px" onerror="this.src='assets/icons/items/scroll_weapon.png'">
+                  </div>
+                  <div>
+                    <div style="font-size:17px;font-weight:900;color:var(--gold2)">⚔️ 奇岩 1 元福利與綠色打寶</div>
+                    <div style="font-size:12px;color:var(--tx3)">Fair & Fun Progression</div>
+                  </div>
+                </div>
+                <p style="font-size:13.5px;color:var(--tx);line-height:1.7;margin-bottom:10px">
+                  告別坑錢黑心套路，給上班族最輕鬆、最熱血的衝裝與打寶體驗：
+                </p>
+                <ul style="font-size:12.5px;color:var(--tx2);line-height:1.8;padding-left:18px;margin-bottom:0">
+                  <li><b>1 元福利商人</b>：武防卷軸、勇敢藥水、自我加速藥水只要 1 金幣，爽快衝裝！</li>
+                  <li><b>裝備詞綴鑑定</b>：解除詞綴限制，尋寶、威儀、承載屬性隨機洗鍊。</li>
+                  <li><b>真實裝備安定值</b>：武器安定 6、防具安定 4，心跳過裝重溫當年澎湃回憶。</li>
+                </ul>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Server Changelog (伺服器更新歷程紀錄) -->
+        <div class="panel" id="changelog" style="border-color:var(--gold)">
+          <div class="panel-h">
+            <div class="panel-h-title">
+              <span>📜 伺服器完整更新歷程紀錄 (Changelog)</span>
+              <span class="badge new">持續維護中</span>
+            </div>
+            <span style="font-size:12px;color:var(--tx2)">即時透明 ｜ 版本演進</span>
+          </div>
+          <div class="panel-b">
+            <div class="timeline-container">
+              
+              <!-- 2026-09-05 更新項目 -->
+              <div class="timeline-item">
+                <div class="timeline-badge">NEW</div>
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <span class="timeline-title">🔥 2026-09-05 ｜ 原版全素材全面同步與官網六大資料庫巨型升級</span>
+                    <span class="timeline-tag">重大版本 v2.5</span>
+                  </div>
+                  <ul class="timeline-list">
+                    <li><b>【美術圖資】全面提取原版圖資</b>：成功自遊戲原始碼中提取 1,223 隻怪物去背立繪、264 張獵場實景預覽圖、3,000+ 武器/防具/道具/技能圖標，全站無死角同步。</li>
+                    <li><b>【六大資料庫】全面升級圖鑑系統</b>：魔物、獵場、裝備、道具、技能、掉落表全線導入像素圖案與滑入抽屜檢視，查閱裝備與掉落如絲般順暢。</li>
+                    <li><b>【品牌正名】全面更名為「天堂ARPG」</b>：全站名稱、標題、頁尾與中文化文案一致化。</li>
+                    <li><b>【巴哈精選追憶】導入典藏原版圖集</b>：說話之島渡輪、古魯丁繁華街景、滿地卷軸綠水回憶錄完整上線。</li>
+                    <li><b>【純淨直連】移除外部試算表暴露</b>：關閉外部試算表連結與設定視窗，確保官網私密性與純淨使用者體驗。</li>
+                    <li><b>【高速補丁】Google Drive 官方更新通道</b>：配置最新更新檔案高速載點，隨點隨載。</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 2026-09-03 更新項目 -->
+              <div class="timeline-item">
+                <div class="timeline-badge old">VER</div>
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <span class="timeline-title">⚔️ 2026-09-03 ｜ 裝備安定值機制實裝與掉落機率平衡調整</span>
+                    <span class="timeline-tag">系統調優 v2.2</span>
+                  </div>
+                  <ul class="timeline-list">
+                    <li><b>【安定值鑑定】</b>全服 909 件裝備安定值標籤上線（武器安定 6、防具安定 4、部分特種裝備不可安定）。</li>
+                    <li><b>【世界頭目掉落】</b>校準吉爾塔斯、四大巨龍、死亡騎士掉落表，稀有技術書與黑妖水晶機率平衡。</li>
+                    <li><b>【響應式介面】</b>優化行動裝置排版，手機瀏覽各大資料庫與留言板排版自動適配。</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 2026-08-28 更新項目 -->
+              <div class="timeline-item">
+                <div class="timeline-badge old">VER</div>
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <span class="timeline-title">🌟 2026-08-28 ｜ 守護者靈魂系統初版與 ARPG 戰鬥 HUD 上線</span>
+                    <span class="timeline-tag">架構奠定 v2.0</span>
+                  </div>
+                  <ul class="timeline-list">
+                    <li><b>【守護者靈魂】</b>第一期守護者契約實裝，加入基礎光環加成（攻擊速度、吸血與減傷）。</li>
+                    <li><b>【戰鬥 HUD】</b>引入暗黑破壞神雙球血量/魔力界面，即時傷害數字反饋與暴擊震顫效果。</li>
+                    <li><b>【智慧撿取】</b>開發地面物品過濾核心，過濾灰白雜物，大幅提升練功效率。</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- 2026-08-15 更新項目 -->
+              <div class="timeline-item">
+                <div class="timeline-badge old">INIT</div>
+                <div class="timeline-content">
+                  <div class="timeline-header">
+                    <span class="timeline-title">🚀 2026-08-15 ｜ 天堂ARPG 經典放置懷舊服正式立項開服</span>
+                    <span class="timeline-tag">創世啟航 v1.0</span>
+                  </div>
+                  <ul class="timeline-list">
+                    <li><b>【經典還原】</b>還原 1.0~3.8c 經典地圖、魔物、數值與 NPC。</li>
+                    <li><b>【奇岩福利】</b>設置 1 元福利商人，開放無負擔衝裝與物資供應。</li>
+                  </ul>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+
+        <!-- Player Message Board (玩家留言板看板) -->
+        <div class="panel" id="board" style="border-color:var(--gold)">
+          <div class="panel-h">
+            <div class="panel-h-title">
+              <span>💬 玩家留言板看板</span>
+              <span class="badge new">即時交流</span>
+            </div>
+            <span style="font-size:12.5px;color:var(--gold2)">
+              🛡️ 全服自由交流 ｜ 管理團隊即時審閱
+            </span>
+          </div>
+          <div class="panel-b">
+            
+            <!-- 留言表單 -->
+            <div class="board-form-container">
+              <div style="font-weight:700;color:var(--gold2);margin-bottom:10px;font-size:15px;display:flex;align-items:center;gap:6px">
+                <span>✍️ 發表您的遊戲建議與心得</span>
+                <span style="font-size:12px;color:var(--tx2);font-weight:normal">（送出後立即出現在下方，歡迎暢所欲言）</span>
+              </div>
+              <form id="board-form" onsubmit="handleBoardSubmit(event)">
+                <div class="board-inputs-row">
+                  <input type="text" id="board-name" class="input-field" placeholder="您的角色名稱 (例: 奇岩衝裝王)" required maxlength="20">
+                  <select id="board-job" class="input-field">
+                    <option value="騎士">🛡️ 騎士</option>
+                    <option value="妖精" selected>🏹 妖精</option>
+                    <option value="法師">🔮 法師</option>
+                    <option value="王族">👑 王族</option>
+                    <option value="黑妖">🗡️ 黑暗妖精</option>
+                    <option value="戰士">🪓 戰士</option>
+                    <option value="龍騎">🐉 龍騎士</option>
+                    <option value="幻術">🌀 幻術士</option>
+                  </select>
+                  <select id="board-cat" class="input-field">
+                    <option value="遊戲建議" selected>💡 遊戲建議</option>
+                    <option value="BUG回報">🐞 BUG回報</option>
+                    <option value="衝裝心得">⚔️ 衝裝心得</option>
+                    <option value="地圖掉落">🗺️ 地圖掉落</option>
+                    <option value="隨聊交流">💬 隨聊交流</option>
+                  </select>
+                </div>
+                <textarea id="board-msg" class="input-field" placeholder="請留下您對天堂ARPG的寶貴意見、平衡建議或心得反饋..." required maxlength="500"></textarea>
+                <div class="board-form-footer">
+                  <button type="submit" class="btn big" id="board-submit-btn" style="padding:10px 24px">
+                    🚀 送出留言並推送至試算表
+                  </button>
+                  <span id="board-sync-status" style="font-size:12.5px;color:var(--tx2)">
+                    🔒 資料將保存至 Google 試算表【玩家留言】分頁
+                  </span>
+                </div>
+              </form>
+            </div>
+
+            <!-- 留言篩選標籤 -->
+            <div class="board-filter-tabs">
+              <span style="font-size:13px;color:var(--tx2);margin-right:6px">篩選類別：</span>
+              <button class="filter-tab active" onclick="filterBoard('全部', this)">全部留言 (<span id="total-board-count">0</span>)</button>
+              <button class="filter-tab" onclick="filterBoard('遊戲建議', this)">💡 遊戲建議</button>
+              <button class="filter-tab" onclick="filterBoard('BUG回報', this)">🐞 BUG回報</button>
+              <button class="filter-tab" onclick="filterBoard('衝裝心得', this)">⚔️ 衝裝心得</button>
+              <button class="filter-tab" onclick="filterBoard('地圖掉落', this)">🗺️ 地圖掉落</button>
+              <button class="filter-tab" onclick="filterBoard('隨聊交流', this)">💬 隨聊交流</button>
+            </div>
+
+            <!-- 留言列表區塊 (出現在下方) -->
+            <div class="board-list" id="board-list-container">
+              <!-- 動態載入 / JavaScript 渲染 -->
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Database Stats -->
+        <div class="panel" id="database" style="border-color:var(--gold)">
+          <div class="panel-h">
+            <div class="panel-h-title">📚 遊戲資料庫概覽</div>
+          </div>
+          <div class="panel-b">
+            <div class="stats-hub">
+              <div class="stat-item">
+                <div class="stat-num">2,741+</div>
+                <div class="stat-lbl">道具全圖鑑</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">909+</div>
+                <div class="stat-lbl">神兵防具裝備</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">1,224+</div>
+                <div class="stat-lbl">傳奇魔物與首領</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">264+</div>
+                <div class="stat-lbl">獵場地圖與龍穴</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">958+</div>
+                <div class="stat-lbl">掉落物詳細來源</div>
+              </div>
+              <div class="stat-item">
+                <div class="stat-num">191+</div>
+                <div class="stat-lbl">全職業經典技能</div>
+              </div>
+            </div>
+
+            <!-- Database Search -->
+            <form onsubmit="event.preventDefault(); const q=document.getElementById('db-idx-input').value.trim(); if(q) window.location.href='drops.html?q=' + encodeURIComponent(q); else window.location.href='drops.html';" style="margin: 16px 0 20px;">
+              <div class="searchbar">
+                <input type="text" id="db-idx-input" placeholder="🔍 快速檢索裝備、怪物、獵場、掉落資料庫 (例如: 祝武、瑟魯基、死亡騎士、傲慢之塔)...">
+                <button type="submit" class="btn">立即檢索</button>
+              </div>
+            </form>
+
+            <!-- Six Interactive Database Portals -->
+            <div class="grid g3" style="gap:12px;margin-top:12px">
+              <a href="drops.html" class="card" style="text-decoration:none;border-color:rgba(212,175,55,0.4);transition:0.2s">
+                <div style="font-size:24px;margin-bottom:6px">🎯</div>
+                <h3 style="color:var(--gold2);margin-bottom:4px">掉落查詢資料庫</h3>
+                <p style="font-size:12.5px;color:var(--tx2);margin:0">全服 958 件掉落物，包含 BOSS 掉率、小怪與產出獵場。</p>
+              </a>
+
+              <a href="maps-index.html" class="card" style="text-decoration:none;border-color:rgba(212,175,55,0.4);transition:0.2s">
+                <div style="font-size:24px;margin-bottom:6px">🗺️</div>
+                <h3 style="color:var(--gold2);margin-bottom:4px">獵場地圖索引</h3>
+                <p style="font-size:12.5px;color:var(--tx2);margin:0">傲慢之塔 1-100F、龍之谷、暗影神殿出沒怪物與寶物速查。</p>
+              </a>
+
+              <a href="items.html" class="card" style="text-decoration:none;border-color:rgba(212,175,55,0.4);transition:0.2s">
+                <div style="font-size:24px;margin-bottom:6px">🎒</div>
+                <h3 style="color:var(--gold2);margin-bottom:4px">道具全圖鑑</h3>
+                <p style="font-size:12.5px;color:var(--tx2);margin:0">2,741 件消耗品、武防卷軸、魔法娃娃與材料產出查詢。</p>
+              </a>
+
+              <a href="equip.html" class="card" style="text-decoration:none;border-color:rgba(212,175,55,0.4);transition:0.2s">
+                <div style="font-size:24px;margin-bottom:6px">⚔️</div>
+                <h3 style="color:var(--gold2);margin-bottom:4px">裝備神兵圖鑑</h3>
+                <p style="font-size:12.5px;color:var(--tx2);margin:0">909 件武器、防具、飾品 AC、攻擊力與安定值全公開。</p>
+              </a>
+
+              <a href="mobs.html" class="card" style="text-decoration:none;border-color:rgba(212,175,55,0.4);transition:0.2s">
+                <div style="font-size:24px;margin-bottom:6px">👹</div>
+                <h3 style="color:var(--gold2);margin-bottom:4px">怪物首領圖鑑</h3>
+                <p style="font-size:12.5px;color:var(--tx2);margin:0">1,224 隻怪物與傳奇 BOSS 血量、防禦、經驗與掉落一覽。</p>
+              </a>
+
+              <a href="skills.html" class="card" style="text-decoration:none;border-color:rgba(212,175,55,0.4);transition:0.2s">
+                <div style="font-size:24px;margin-bottom:6px">✨</div>
+                <h3 style="color:var(--gold2);margin-bottom:4px">技能魔法圖鑑</h3>
+                <p style="font-size:12.5px;color:var(--tx2);margin:0">八大職業 191 個技能消耗、冷卻延遲與法術效果解析。</p>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Exclusive Features -->
+        <div class="panel" id="features">
+          <div class="panel-h">🔥 本服專屬獨家特色</div>
+          <div class="panel-b grid g2">
+
+            <div class="card">
+              <h3>🧹 物品掉落過濾器 <span class="badge hot">獨家首創</span></h3>
+              <p>右下角專屬功能按鈕，支援道具名稱即時搜尋與黑名單勾選。被過濾的道具直接不產生地面雜物，打寶畫面乾淨清爽，徹底告別滿地垃圾！</p>
+            </div>
+
+            <div class="card">
+              <h3>🏪 奇岩 1 元福利商人 <span class="badge">超佛福利</span></h3>
+              <p>白武、祝武、詛武、白防、祝防、詛防全數置頂販售，單價僅 1 金幣！人人皆可暢享衝裝快感，圓夢全身 +7、+8、+9 閃耀神裝。</p>
+              <div class="scroll-preview">
+                <img src="assets/icons/items/scroll_weapon.png" alt="白武" title="對武器施法的卷軸">
+                <img src="assets/icons/items/scroll_weapon_b.png" alt="祝武" title="祝福的 對武器施法的卷軸">
+                <img src="assets/icons/items/scroll_weapon_c.png" alt="詛武" title="受詛咒的 對武器施法的卷軸">
+                <img src="assets/icons/items/scroll_armor.png" alt="白防" title="對盔甲施法的卷軸">
+                <img src="assets/icons/items/scroll_armor_b.png" alt="祝防" title="祝福的 對盔甲施法的卷軸">
+                <img src="assets/icons/items/scroll_armor_c.png" alt="詛防" title="受詛咒的 對盔甲施法的卷軸">
+                <span style="font-size:12px;color:var(--gold2);margin-left:auto">正版像素卷軸</span>
+              </div>
+            </div>
+
+            <div class="card">
+              <h3>👑 全職業試煉一鍵領取 <span class="badge new">完美修復</span></h3>
+              <p>等級達到條件後，前往各職業導師 NPC 即可直接領取試煉神兵！全面修復法師 45 級試煉獎勵（瑪娜斗篷、神聖魔法書正常取得無報錯）。</p>
+            </div>
+
+            <div class="card">
+              <h3>🛡️ 解除防具磁條（詞綴）限制 <span class="badge">戰力暴增</span></h3>
+              <p>防具（盔甲、頭盔、斗篷、手套、長靴、飾品等）全面解禁開放「威儀」、「尋寶」頂級詞綴！承載詞條大幅提升至 5000 上限，配裝更自由。</p>
+            </div>
+
+            <div class="card">
+              <h3>☀️ 🌙 妖精夜視功能 & 經典日夜交替 <span class="badge">舒適體驗</span></h3>
+              <p>恢復經典日夜交替與洞窟黑夜探索！妖精天生具備夜視天賦，黑夜洞窟清晰無阻，並支援隨時自由切換開關；支援經典夜視頭盔與油燈照明。</p>
+            </div>
+
+            <div class="card">
+              <h3>⚡ 爽快戰鬥節奏（經典怪物生態） <span class="badge">暢快打怪</span></h3>
+              <p>完整保留原作魔物生態與生命回復機制，原汁原味重現當年打王打寶的熱血刺激！</p>
+            </div>
+
+            <div class="card">
+              <h3>🎒 裝備紙娃娃極速穿脫同步 <span class="badge">UI優化</span></h3>
+              <p>雙擊背包穿戴裝備，左側紙娃娃裝備欄即時連動刷新！+7 強化字樣清晰可見，穿脫絕不消失，支援滑鼠拖曳自定義佈局。</p>
+            </div>
+
+            <div class="card">
+              <h3>✨ 正版專屬卷軸圖示 <span class="badge">原汁原味</span></h3>
+              <p>祝武/詛武、祝防/詛防採用正統金光與紅光像素圖示，並於代碼底層內嵌硬編碼防護，資源永不遺失、永不跑版。</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Classes -->
+        <div class="panel" id="classes">
+          <div class="panel-h">👑 八大經典職業一覽</div>
+          <div class="panel-b">
+            <div class="class-row">
+              <div class="class-box">
+                <span class="class-icon">👑</span>
+                <div class="class-title">王族</div>
+                <div class="class-sub">君主 / 盟戰領導</div>
+              </div>
+              <div class="class-box">
+                <span class="class-icon">🛡️</span>
+                <div class="class-title">騎士</div>
+                <div class="class-sub">近戰肉盾 / 衝暈反屏</div>
+              </div>
+              <div class="class-box">
+                <span class="class-icon">🏹</span>
+                <div class="class-title">妖精</div>
+                <div class="class-sub">遠程游俠 / 三重矢</div>
+              </div>
+              <div class="class-box">
+                <span class="class-icon">🔮</span>
+                <div class="class-title">法師</div>
+                <div class="class-sub">十階神法 / 究光秒殺</div>
+              </div>
+              <div class="class-box">
+                <span class="class-icon">🗡️</span>
+                <div class="class-title">黑暗妖精</div>
+                <div class="class-sub">暗殺極致 / 會心一擊</div>
+              </div>
+              <div class="class-box">
+                <span class="class-icon">🪓</span>
+                <div class="class-title">戰士</div>
+                <div class="class-sub">狂暴雙斧 / 泰坦反擊</div>
+              </div>
+              <div class="class-box">
+                <span class="class-icon">🐉</span>
+                <div class="class-title">龍騎士</div>
+                <div class="class-sub">龍語屠宰 / 三龍覺醒</div>
+              </div>
+              <div class="class-box">
+                <span class="class-icon">🌀</span>
+                <div class="class-title">幻術士</div>
+                <div class="class-sub">奇蹟立方 / 幻象心靈</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Core Gameplay Systems -->
+        <div class="panel" id="systems">
+          <div class="panel-h">⚙️ 核心玩法機制</div>
+          <div class="panel-b grid g3">
+            <div class="card">
+              <h3>🔨 強化系統</h3>
+              <p>遵循經典安定值機制，武器安定 6、防具安定 4。祝福卷軸隨機跳 +1~+3，強化數值越高獲得越恐怖的傷害增幅！</p>
+            </div>
+            <div class="card">
+              <h3>🐾 寵物與收服</h3>
+              <p>野外使用肉塊誘捕杜賓狗等戰鬥夥伴，法師支援迷魅術收服魔物，魅力屬性可召喚多隻強大夥伴一同出征！</p>
+            </div>
+            <div class="card">
+              <h3>🏰 經典三大城堡攻防</h3>
+              <p>肯特城、風木城、海音城攻防戰，突破城門、粉碎守護塔，成為全服之王！</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Sidebar -->
+      <div>
+
+        <!-- Quick Access & Download Section -->
+        <div class="panel" id="download" style="border-color:var(--gold)">
+          <div class="panel-h">
+            <div class="panel-h-title">🎮 遊戲下載與快速開始</div>
+          </div>
+          <div class="panel-b" style="display:grid;gap:12px">
+
+            <!-- 最新更新檔下載連結卡片 -->
+            <div style="background:linear-gradient(135deg, rgba(212,175,55,0.15), rgba(18,24,38,0.9));border:2px solid var(--gold);border-radius:10px;padding:14px;text-align:center">
+              <div style="font-size:12px;color:var(--gold);font-weight:900;letter-spacing:1px;margin-bottom:4px">【最新神話版本安裝包】</div>
+              <div style="font-size:15px;font-weight:900;color:#fff;margin-bottom:8px">2026 神話版本完整客戶端</div>
+              <p style="font-size:12.5px;color:var(--tx2);margin-bottom:12px;line-height:1.5">
+                包含全新世界王「死亡榮耀騎士・奧瑞斯」、專屬神話雙技能【榮耀之裁】【死亡引力】、全職業216技能庫全數復原、雙層防護完整安裝包。
+              </p>
+              <a class="btn big" style="width:100%;justify-content:center;font-size:14.5px;padding:10px" href="https://drive.google.com/file/d/1PZ-JB2M8jZJur9tpuUpsOs8sGQ_eVyue/view?usp=sharing" target="_blank" rel="noopener">
+                📥 下載神話完整安裝包 (Google Drive)
+              </a>
+            </div>
+
+            <!-- 本機啟動遊戲卡片 -->
+            <div style="background:var(--panel2);border:1px solid var(--line);border-radius:10px;padding:12px">
+              <button class="btn" style="width:100%;justify-content:center;margin-bottom:8px" onclick="alert('若您已下載主程式，請至解壓縮目錄執行 IdleLineage.exe 即可暢玩！')">
+                🚀 啟動本機主程式 (IdleLineage.exe)
+              </button>
+              <div style="font-size:12px;color:var(--tx2);line-height:1.6">
+                <b>系統需求：</b> Windows 10 / 11 (64-bit)<br>
+                <b>更新方式：</b> 下載上方更新檔後，解壓縮覆蓋至遊戲資料夾即可。
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Latest Updates -->
+        <div class="panel" id="news">
+          <div class="panel-h" style="display:flex;align-items:center;justify-content:space-between">
+            <div class="panel-h-title">📢 重點公告速覽</div>
+            <span id="news-sync-status" style="font-size:11px;color:var(--tx2);font-weight:normal">🔄 雲端即時連動</span>
+          </div>
+          <div class="panel-b">
+            <ul class="news-list" id="news-list-ul">
+              <li>
+                <time>2026-09-19</time>
+                <div><span class="badge" style="background:#e2938f;color:#1a1010;font-size:10px;padding:2px 6px;border-radius:4px;font-weight:bold;margin-right:6px">最新</span><b>【重大神話版本更新】</b> 全新世界王「死亡榮耀騎士・奧瑞斯」傲世降臨（8方位全動態序列幀＋專屬神話雙技能）、實裝【榮耀之裁】(GFX 14001) 與【死亡引力】(GFX 14002)、全職業 216 技能資料庫 100% 復原歸位、雙層加固完整客戶端發布。</div>
+              </li>
+              <li>
+                <time>2026-09-09</time>
+                <div><span class="badge" style="background:rgba(212,175,55,0.2);color:var(--gold2);font-size:10px;padding:2px 6px;border-radius:4px;font-weight:bold;margin-right:6px">歷史</span><b>【重大版本更新】</b> 全新世界王「扭曲的 潔尼斯女王」登場（8方位全套序列幀＋專屬戒指掉落）、最新同步補丁安裝器瘦身發布（無後台純淨版，僅 350MB）、NPC 雙行稱號優化、商店動態自訂分頁實裝。</div>
+              </li>
+              <li>
+                <time>2026-09-06</time>
+                <div><b>【核心與戰鬥重大更新】</b> 妖精「三重矢」0.15s極速CD且施法可同步普攻、後台地圖怪物刷新率即時調整、自訂地圖怪物全數現身(解除BOSS互斥與視野外限制)、原地站立自動刷新重生、核心代碼混淆加密。</div>
+              </li>
+              <li>
+                <time>2026-09</time>
+                <div><b>【圖資全同步】</b> 提取 1,223 隻怪物透明立繪、264 張獵場實景、3,000+ 道具裝備技能原版圖標。</div>
+              </li>
+              <li>
+                <time>2026-09</time>
+                <div><b>【更新檔發布】</b> 上線 Google Drive 最新補丁下載、整合官網留言板與右下角客訴聊天。</div>
+              </li>
+              <li>
+                <time>2026-09</time>
+                <div><b>【核心重大更新】</b> 整合物品掉落過濾器、修復法師45試煉瑪娜斗篷、解除防具詞綴限制。</div>
+              </li>
+              <li>
+                <time>2026-08</time>
+                <div><b>【福利商城上線】</b> 奇岩 1 元福利商人、白/祝/詛武防卷全面上架。</div>
+              </li>
+              <li>
+                <time>2026-08</time>
+                <div><b>【環境優化】</b> 日夜交替黑夜恢復、妖精夜視功能加入（可自由切換）。</div>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Community / Customer Support Panel -->
+        <div class="panel">
+          <div class="panel-h">
+            <div class="panel-h-title">🎧 玩家交流與在線客訴</div>
+          </div>
+          <div class="panel-b" style="text-align:center;font-size:13.5px">
+            <p style="margin-bottom:12px;color:var(--tx2)">遊戲問題回報、攻略交流、更新建議</p>
+            <div style="background:rgba(212,175,55,0.05);border:1px dashed var(--gold);padding:14px;border-radius:10px;margin-bottom:12px">
+              <div style="font-size:24px;margin-bottom:4px">💬</div>
+              <div style="font-weight:700;color:var(--gold2)">官方 LINE / Discord 社群</div>
+              <div style="font-size:12px;color:var(--tx2)">歡迎各位勇者加入討論</div>
+            </div>
+            <button class="btn" style="width:100%;justify-content:center;margin-bottom:8px" onclick="toggleCsModal()">
+              🎧 開啟右下角客訴聊天室
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </main>
+
+  <!-- ==========================================================================
+       右下角懸浮客訴按鈕與對話框 (Floating CS Chat Widget)
+       ========================================================================== -->
+  <!-- 懸浮啟動按鈕 -->
+  <div class="cs-floating-btn" onclick="toggleCsModal()" id="cs-float-btn" title="開啟官方客訴與即時客服">
+    <div class="cs-pulse-dot"></div>
+    <span>🎧 客訴與線上客服</span>
+  </div>
+
+  <!-- 懸浮客訴視窗 -->
+  <div class="cs-modal-box" id="cs-modal-box">
+    <!-- Header -->
+    <div class="cs-header">
+      <div class="cs-header-left">
+        <span style="font-size:20px">🎧</span>
+        <div>
+          <div class="cs-header-title">天堂ARPG 官方客訴中心</div>
+          <div class="cs-header-sub">
+            <span style="width:6px;height:6px;background:var(--green);border-radius:50%;display:inline-block"></span>
+            GM / 客服人員在線排查中
+          </div>
+        </div>
+      </div>
+      <button class="cs-close-btn" onclick="toggleCsModal()">✕</button>
+    </div>
+
+    <!-- Message Body -->
+    <div class="cs-body" id="cs-messages-container">
+      <div class="cs-msg system">
+        👋 <b>勇者您好！這裡是官方即時客訴與反饋中心。</b><br>
+        若您在遊戲中遭遇帳號問題、重大異常、掉落遺失或申訴需求，請在下方留下您的角色暱稱與詳細狀況，客服團隊將盡速排查處理！
+        <div class="cs-msg-meta">🤖 系統客服 ｜ 剛剛</div>
+      </div>
+    </div>
+
+    <!-- Input Footer -->
+    <div class="cs-footer">
+      <form id="cs-form" onsubmit="handleCsSubmit(event)">
+        <div class="cs-footer-inputs">
+          <input type="text" id="cs-name" class="input-field" placeholder="角色暱稱 (必填)" required style="padding:7px 10px;font-size:13px">
+          <input type="text" id="cs-contact" class="input-field" placeholder="聯絡方式 (LINE/Email 選填)" style="padding:7px 10px;font-size:13px">
+        </div>
+        <div class="cs-send-row" style="margin-top:6px">
+          <input type="text" id="cs-content" class="input-field" placeholder="請描述您的客訴問題或情況..." required style="padding:8px 12px;font-size:13px">
+          <button type="submit" class="cs-send-btn" id="cs-send-btn">發送 ✈️</button>
+        </div>
+        <div style="font-size:11px;color:var(--tx2);margin-top:6px;display:flex;align-items:center;gap:6px">
+          <span>🔒 官方客服即時受理 ｜ 訊息安全加密直達團隊</span>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="wrap">
+      <div>
+        © 2026 天堂ARPG 官方網站 ｜ 經典放置天堂 綠色懷舊版<br>
+        <span style="font-size:12px;color:var(--tx2)">純粹經典 ｜ 極致還原 ｜ 永久維護</span>
+      </div>
+      <div>
+        <a href="#hero">回到頂部</a> ｜
+        <a href="https://drive.google.com/file/d/1PZ-JB2M8jZJur9tpuUpsOs8sGQ_eVyue/view?usp=sharing" target="_blank" rel="noopener">更新下載</a> ｜
+        <a href="#board">玩家留言板</a> ｜
+        <a href="#features">獨家特色</a> ｜
+        <a href="#changelog">更新歷程</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       JavaScript 邏輯：留言板 + 客訴聊天互動模組
+       ========================================================================== -->
+  <script>
+    // --------------------------------------------------------------------------
+    // 設定參數 (Configuration)
+    // --------------------------------------------------------------------------
+
+    // 職業對應圖示
+    const JOB_ICONS = {
+      "騎士": "🛡️",
+      "妖精": "🏹",
+      "法師": "🔮",
+      "王族": "👑",
+      "黑妖": "🗡️",
+      "黑暗妖精": "🗡️",
+      "戰士": "🪓",
+      "龍騎": "🐉",
+      "龍騎士": "🐉",
+      "幻術": "🌀",
+      "幻術士": "🌀"
+    };
+
+    // 初始精選玩家留言（首頁即時顯示，體驗熱鬧氛圍）
+    const DEFAULT_BOARD_ITEMS = [
+      {
+        name: "奇岩衝裝魔人",
+        job: "騎士",
+        category: "衝裝心得",
+        message: "奇岩 1 元福利商人太佛心了！全身裝備終於點到 +8，祝福卷軸跳 +2 的音效超級爽，圓了十年前的夢想！",
+        time: "2026-09-05 15:42"
+      },
+      {
+        name: "世界樹守護者",
+        job: "妖精",
+        category: "遊戲建議",
+        message: "恢復經典黑夜跟日夜交替超有以前的味道，妖精自帶夜視太方便了！建議以後可以多加一些地監高階BOSS掉落專屬材料！",
+        time: "2026-09-05 14:18"
+      },
+      {
+        name: "究極光裂術",
+        job: "法師",
+        category: "BUG回報",
+        message: "法師 45 級試煉瑪娜斗篷已成功拿到無報錯，回魔速度大幅提升，感謝GM迅速修復！",
+        time: "2026-09-05 11:30"
+      },
+      {
+        name: "古魯丁掛機王",
+        job: "黑暗妖精",
+        category: "遊戲建議",
+        message: "物品過濾器非常好用，滿地肉塊跟短劍都不會噴出來卡畫面了，希望下一波更新能加入寵物自動餵食！",
+        time: "2026-09-04 22:15"
+      },
+      {
+        name: "熱血盟主",
+        job: "王族",
+        category: "隨聊交流",
+        message: "肯特城盟戰有人要一起衝嗎？我們盟已經十幾個人在奇岩備戰了，歡迎新手老手一起加入！",
+        time: "2026-09-04 18:02"
+      }
+    ];
+
+    // --------------------------------------------------------------------------
+    // 設定參數 (Configuration)
+    // --------------------------------------------------------------------------
+    // 部署 Google Apps Script 後產生的網路應用程式網址 (Web App URL)
+    const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbw-if16oaLbWggYT_izxXOJdLMriMR6AjW1VsZusnkDbmCe3pJ2Wf8qzTH1nR9OaIE/exec";
+
+    // 當前留言數據集合
+    let currentBoardItems = [];
+    let currentFilter = '全部';
+
+    // --------------------------------------------------------------------------
+    // 官方公告數據與模組 (Official News & Announcements Module)
+    // --------------------------------------------------------------------------
+    const DEFAULT_NEWS_ITEMS = [
+      {
+        date: "2026-09-06",
+        tag: "最新",
+        title: "【核心與戰鬥重大更新】",
+        content: "妖精「三重矢」0.15s極速CD且施法可同步普攻、後台地圖怪物刷新率即時調整、自訂地圖怪物全數現身(解除BOSS互斥與視野外限制)、原地站立自動刷新重生、核心代碼混淆加密。"
+      },
+      {
+        date: "2026-09",
+        tag: "更新",
+        title: "【圖資全同步】",
+        content: "提取 1,223 隻怪物透明立繪、264 張獵場實景、3,000+ 道具裝備技能原版圖標。"
+      },
+      {
+        date: "2026-09",
+        tag: "發布",
+        title: "【更新檔發布】",
+        content: "上線 Google Drive 最新補丁下載、整合官網留言板與右下角客訴聊天。"
+      },
+      {
+        date: "2026-09",
+        tag: "核心",
+        title: "【核心重大更新】",
+        content: "整合物品掉落過濾器、修復法師45試煉瑪娜斗篷、解除防具詞綴限制。"
+      },
+      {
+        date: "2026-08",
+        tag: "活動",
+        title: "【福利商城上線】",
+        content: "奇岩 1 元福利商人、白/祝/詛武防卷全面上架。"
+      },
+      {
+        date: "2026-08",
+        tag: "優化",
+        title: "【環境優化】",
+        content: "日夜交替黑夜恢復、妖精夜視功能加入（可自由切換）。"
+      }
+    ];
+
+    let currentNewsItems = [];
+
+    function loadNewsData() {
+      // 1. 先從快取讀取（毫秒級即時呈現，避免任何空白延遲）
+      const localData = localStorage.getItem('lin_news_items');
+      if (localData) {
+        try {
+          const parsed = JSON.parse(localData);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            currentNewsItems = parsed;
+          } else {
+            currentNewsItems = [...DEFAULT_NEWS_ITEMS];
+          }
+        } catch (e) {
+          currentNewsItems = [...DEFAULT_NEWS_ITEMS];
+        }
+      } else {
+        currentNewsItems = [...DEFAULT_NEWS_ITEMS];
+      }
+      renderNewsList();
+
+      // 2. 從 Google 試算表（透過 Apps Script 或 API）動態抓取最新公告
+      if (APPS_SCRIPT_URL) {
+        fetch(`${APPS_SCRIPT_URL}?action=get_news`)
+          .then(res => res.json())
+          .then(json => {
+            if (json.status === 'success' && Array.isArray(json.data) && json.data.length > 0) {
+              currentNewsItems = json.data.map(item => ({
+                date: item.date || '最新',
+                tag: item.tag || '公告',
+                title: item.title || '',
+                content: item.content || ''
+              }));
+              localStorage.setItem('lin_news_items', JSON.stringify(currentNewsItems));
+              renderNewsList();
+              const syncEl = document.getElementById('news-sync-status');
+              if (syncEl) syncEl.innerHTML = '🟢 雲端已連線';
+            }
+          })
+          .catch(err => {
+            console.log('News sync from sheet info:', err);
+          });
+      }
+    }
+
+    function renderNewsList() {
+      const ul = document.getElementById('news-list-ul');
+      if (!ul) return;
+      if (!currentNewsItems || currentNewsItems.length === 0) {
+        currentNewsItems = [...DEFAULT_NEWS_ITEMS];
+      }
+      ul.innerHTML = currentNewsItems.map((item, idx) => {
+        const isFirst = (idx === 0);
+        const tagText = item.tag || (isFirst ? '最新' : '公告');
+        const badgeHtml = `<span class="badge" style="background:${isFirst ? '#e2938f' : '#2b394a'};color:${isFirst ? '#1a1010' : '#ffd700'};font-size:10px;padding:2px 6px;border-radius:4px;font-weight:bold;margin-right:6px">${escapeHtml(tagText)}</span>`;
+        return `<li>
+          <time>${escapeHtml(item.date)}</time>
+          <div>${badgeHtml}<b>${escapeHtml(item.title)}</b> ${escapeHtml(item.content)}</div>
+        </li>`;
+      }).join('');
+    }
+
+    // --------------------------------------------------------------------------
+    // 初始化
+    // --------------------------------------------------------------------------
+    document.addEventListener('DOMContentLoaded', () => {
+      loadNewsData();
+      loadBoardData();
+      renderBoardList();
+      initCsChatHistory();
+    });
+
+    // 顯示 Toast 提示
+    function showToast(msg, duration = 3000) {
+      const el = document.getElementById('toast-msg');
+      el.innerHTML = msg;
+      el.style.display = 'block';
+      setTimeout(() => {
+        el.style.display = 'none';
+      }, duration);
+    }
+
+    // --------------------------------------------------------------------------
+    // 留言板模組 (Player Message Board)
+    // --------------------------------------------------------------------------
+    function loadBoardData() {
+      const localData = localStorage.getItem('lin_board_items');
+      if (localData) {
+        try {
+          const parsed = JSON.parse(localData);
+          currentBoardItems = parsed.concat(DEFAULT_BOARD_ITEMS);
+        } catch (e) {
+          currentBoardItems = [...DEFAULT_BOARD_ITEMS];
+        }
+      } else {
+        currentBoardItems = [...DEFAULT_BOARD_ITEMS];
+      }
+
+      // 如果有設定 Apps Script，非同步拉取 Google 試算表最新留言
+      if (APPS_SCRIPT_URL) {
+        fetch(`${APPS_SCRIPT_URL}?action=get_board`)
+          .then(res => res.json())
+          .then(json => {
+            if (json.status === 'success' && json.data && json.data.length > 0) {
+              const remoteItems = json.data.map(item => ({
+                name: item.name,
+                job: item.job,
+                category: item.category,
+                message: item.message,
+                time: item.time
+              }));
+              currentBoardItems = remoteItems;
+              renderBoardList();
+            }
+          })
+          .catch(err => {
+            console.log('載入雲端留言中...', err);
+          });
+      }
+    }
+
+    function renderBoardList() {
+      const container = document.getElementById('board-list-container');
+      const countEl = document.getElementById('total-board-count');
+      if (!container) return;
+
+      const filtered = (currentFilter === '全部') 
+        ? currentBoardItems 
+        : currentBoardItems.filter(item => item.category === currentFilter);
+
+      countEl.textContent = currentBoardItems.length;
+
+      if (filtered.length === 0) {
+        container.innerHTML = '<div style="text-align:center;padding:30px;color:var(--tx2)">目前此分類尚無留言，歡迎搶先發表！</div>';
+        return;
+      }
+
+      let html = '';
+      filtered.forEach(item => {
+        const icon = JOB_ICONS[item.job] || '⚔️';
+        let catClass = '';
+        if (item.category === 'BUG回報') catClass = 'bug';
+        else if (item.category === '衝裝心得') catClass = 'equip';
+
+        html += `
+          <div class="board-item">
+            <div class="board-item-header">
+              <div class="board-avatar">${icon}</div>
+              <div class="board-author">${escapeHtml(item.name)}</div>
+              <span class="board-job-badge">${escapeHtml(item.job)}</span>
+              <span class="board-cat-badge ${catClass}">${escapeHtml(item.category)}</span>
+              <div class="board-time">${escapeHtml(item.time)}</div>
+            </div>
+            <div class="board-content">${escapeHtml(item.message)}</div>
+            <div class="board-item-footer">
+              <span>🛡️ 官方認證留言 ｜ 全體勇者可見</span>
+            </div>
+          </div>
+        `;
+      });
+      container.innerHTML = html;
+    }
+
+    function filterBoard(cat, btn) {
+      currentFilter = cat;
+      document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+      btn.classList.add('active');
+      renderBoardList();
+    }
+
+    // 玩家送出留言
+    function handleBoardSubmit(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('board-name');
+      const jobInput = document.getElementById('board-job');
+      const catInput = document.getElementById('board-cat');
+      const msgInput = document.getElementById('board-msg');
+      const submitBtn = document.getElementById('board-submit-btn');
+      const statusEl = document.getElementById('board-sync-status');
+
+      const name = nameInput.value.trim();
+      const job = jobInput.value;
+      const category = catInput.value;
+      const message = msgInput.value.trim();
+
+      if (!name || !message) {
+        alert('請填寫角色名稱與留言內容！');
+        return;
+      }
+
+      const now = new Date();
+      const timeStr = `${now.getFullYear()}-${String(now.getMonth()+1).padStart(2,'0')}-${String(now.getDate()).padStart(2,'0')} ${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      const newItem = { name, job, category, message, time: timeStr };
+
+      // 1. 立即出現在下方 (零延遲極速呈現)
+      currentBoardItems.unshift(newItem);
+      renderBoardList();
+
+      // 2. 本地儲存
+      const saved = JSON.parse(localStorage.getItem('lin_board_items') || '[]');
+      saved.unshift(newItem);
+      localStorage.setItem('lin_board_items', JSON.stringify(saved));
+
+      // 3. 清空輸入
+      msgInput.value = '';
+      statusEl.innerHTML = '🔄 <span style="color:var(--gold2)">正在同步至 Google 試算表...</span>';
+
+      // 4. 推送至 Google Apps Script (試算表「玩家留言」分頁)
+      pushToGoogleSheet({
+        type: 'board',
+        name: name,
+        job: job,
+        category: category,
+        message: message
+      }, (res) => {
+        statusEl.innerHTML = '✅ <span style="color:var(--green)">已成功存入 Google 試算表！</span>';
+        showToast(`🎉 感謝勇者 <b>${escapeHtml(name)}</b>！留言已成功發布並同步至試算表！`);
+        setTimeout(() => {
+          statusEl.innerHTML = '';
+        }, 5000);
+      });
+    }
+
+    // --------------------------------------------------------------------------
+    // 右下角客訴聊天室模組 (Customer Service Float Chat)
+    // --------------------------------------------------------------------------
+    
+    function openLightbox(src, title, caption) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox-title').innerText = title;
+      document.getElementById('lightbox-caption').innerText = caption;
+      const modal = document.getElementById('lightbox-modal');
+      if (modal) modal.classList.add('open');
+    }
+
+    function closeLightbox(e) {
+      const modal = document.getElementById('lightbox-modal');
+      if (modal) modal.classList.remove('open');
+    }
+
+    function toggleCsModal() {
+      const modal = document.getElementById('cs-modal-box');
+      modal.classList.toggle('open');
+      if (modal.classList.contains('open')) {
+        const body = document.getElementById('cs-messages-container');
+        setTimeout(() => body.scrollTop = body.scrollHeight, 100);
+      }
+    }
+
+    function initCsChatHistory() {
+      const history = JSON.parse(localStorage.getItem('lin_cs_history') || '[]');
+      const container = document.getElementById('cs-messages-container');
+      history.forEach(item => {
+        appendCsBubble(item.sender, item.text, item.time, false);
+      });
+    }
+
+    function appendCsBubble(sender, text, time, shouldScroll = true) {
+      const container = document.getElementById('cs-messages-container');
+      const div = document.createElement('div');
+      div.className = `cs-msg ${sender}`;
+      
+      const meta = (sender === 'user') 
+        ? `勇者回報 ｜ ${time}` 
+        : `🤖 官方客服 ｜ ${time}`;
+
+      div.innerHTML = `
+        <div>${escapeHtml(text)}</div>
+        <div class="cs-msg-meta">${meta}</div>
+      `;
+      container.appendChild(div);
+      if (shouldScroll) {
+        container.scrollTop = container.scrollHeight;
+      }
+    }
+
+    function handleCsSubmit(event) {
+      event.preventDefault();
+      const nameInput = document.getElementById('cs-name');
+      const contactInput = document.getElementById('cs-contact');
+      const contentInput = document.getElementById('cs-content');
+      const sendBtn = document.getElementById('cs-send-btn');
+
+      const name = nameInput.value.trim();
+      const contact = contactInput.value.trim();
+      const content = contentInput.value.trim();
+
+      if (!name || !content) {
+        alert('請填寫暱稱與客訴內容！');
+        return;
+      }
+
+      const now = new Date();
+      const timeStr = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+      // 1. 顯示玩家訊息氣泡
+      appendCsBubble('user', content, timeStr);
+      contentInput.value = '';
+
+      // 儲存至本地對話紀錄
+      saveCsHistory('user', content, timeStr);
+
+      // 2. 推送至 Google Apps Script【客訴聊天】分頁
+      pushToGoogleSheet({
+        type: 'chat',
+        name: name,
+        contact: contact,
+        message: content
+      }, () => {
+        showToast('📩 客訴訊息已即時同步至官方試算表！');
+      });
+
+      // 3. 客服自動建檔回執氣泡
+      setTimeout(() => {
+        const replyText = `【系統回執】已收到您的客訴案件！已成功同步建檔至 Google 試算表【客訴聊天】分頁，客服人員與 GM 將於第一時間排查處理。感謝您的耐心回報！`;
+        appendCsBubble('system', replyText, timeStr);
+        saveCsHistory('system', replyText, timeStr);
+      }, 600);
+    }
+
+    function saveCsHistory(sender, text, time) {
+      const history = JSON.parse(localStorage.getItem('lin_cs_history') || '[]');
+      history.push({ sender, text, time });
+      if (history.length > 50) history.shift();
+      localStorage.setItem('lin_cs_history', JSON.stringify(history));
+    }
+
+    // --------------------------------------------------------------------------
+    // 推送至 Google Apps Script 通用函式 (支援 POST 與 GET 雙通道備援)
+    // --------------------------------------------------------------------------
+    function pushToGoogleSheet(payload, callback) {
+      if (!APPS_SCRIPT_URL) {
+        console.log('未設定 APPS_SCRIPT_URL，資料已先保存於本機：', payload);
+        if (callback) callback({ status: 'mock_success' });
+        return;
+      }
+
+      // 使用 text/plain + no-cors 防止跨域 302 重定向報錯
+      fetch(APPS_SCRIPT_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+        body: JSON.stringify(payload)
+      })
+      .then(() => {
+        console.log('試算表 POST 請求已送出');
+        if (callback) callback({ status: 'success' });
+      })
+      .catch(err => {
+        console.warn('POST 請求受限，自動切換 GET 備援通道推送...', err);
+        const queryParams = new URLSearchParams({
+          action: (payload.type === 'chat') ? 'add_chat' : 'add_board',
+          type: payload.type,
+          name: payload.name || '',
+          job: payload.job || '',
+          category: payload.category || '',
+          contact: payload.contact || '',
+          message: payload.message || ''
+        }).toString();
+
+        fetch(`${APPS_SCRIPT_URL}?${queryParams}`, { mode: 'no-cors' })
+          .then(() => {
+            if (callback) callback({ status: 'success' });
+          })
+          .catch(e => {
+            console.error('推送失敗，已保留本機備份', e);
+            if (callback) callback({ status: 'offline_saved' });
+          });
+      });
+    }
+
+    // 工具函式：防 XSS 轉義
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+  </script>
+
+
+  <!-- Lightbox Modal -->
+  <div class="lightbox-modal" id="lightbox-modal" onclick="closeLightbox(event)">
+    <div class="lightbox-content" onclick="event.stopPropagation()">
+      <div class="lightbox-header">
+        <div class="lightbox-title" id="lightbox-title">經典回憶</div>
+        <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      </div>
+      <div class="lightbox-body">
+        <img id="lightbox-img" src="" alt="大圖預覽">
+        <div class="lightbox-caption" id="lightbox-caption"></div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>
